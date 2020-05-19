@@ -70,7 +70,7 @@ public class JokeFrame extends JFrame {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JokeService service = retrofit.create(JokeService.class);
-        JokeController controller = new JokeController(service);
+        JokeController controller = new JokeController(service, joke);
 
         String type = null;
         switch (type) {

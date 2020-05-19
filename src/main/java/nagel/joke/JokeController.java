@@ -8,9 +8,11 @@ import javax.swing.*;
 public class JokeController {
 
     private JokeService service;
+    private JTextArea joke;
 
-    public JokeController(JokeService service) {
+    public JokeController(JokeService service, JTextArea joke) {
         this.service = service;
+        this.joke = joke;
     }
 
     public void requestData(String type) {
