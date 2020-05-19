@@ -1,19 +1,16 @@
 package nagel.joke;
 
-//Request data from JokeService and populate the JokeView
+//Request data from JokeService and populate the JokeFrame
 
 import retrofit2.*;
-
 import javax.swing.*;
 
 public class JokeController {
 
     private JokeService service;
-    private JLabel joke;
 
-    public JokeController(JokeService service, JLabel joke) {
+    public JokeController(JokeService service) {
         this.service = service;
-        this.joke = joke;
     }
 
     public void requestData(String type) {

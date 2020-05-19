@@ -1,5 +1,6 @@
 package nagel.joke;
 
+import javafx.scene.layout.Border;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -8,48 +9,58 @@ import java.awt.*;
 
 public class JokeFrame extends JFrame {
 
-    private JPanel promptPanel;
+    private JFrame frame;
+
     private JLabel prompt;
 
-    private JPanel typePanel;
     private JButton general;
     private JButton programming;
     private JButton knockKnock;
 
-    private JPanel jokePanel;
-    private JLabel joke;
+    private JTextArea joke;
 
     public JokeFrame() {
-        setSize(600, 400);
-        setTitle("Random Joke");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame = new JFrame("Joke Frame");
 
-        promptPanel = new JPanel();
-        promptPanel.setLayout(new BorderLayout());
         prompt = new JLabel();
+        prompt.setHorizontalAlignment(JLabel.CENTER);
+        prompt.setBounds(10,10,600,100);
+        prompt.setFont(new Font ("Comic Sans MS", Font.BOLD, 20));
         prompt.setText("Choose a type of joke:");
-        promptPanel.add(prompt);
 
-        typePanel = new JPanel();
-        typePanel.setLayout(new BorderLayout());
         general = new JButton("General");
+        general.setBounds(60,100,150,30);
+        general.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
         general.addActionListener(actionEvent -> getJokeType());
         programming = new JButton("Programming");
+        programming.setBounds(220,100,150,30);
+        programming.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
         programming.addActionListener(actionEvent -> getJokeType());
         knockKnock = new JButton("Knock-Knock");
+        knockKnock.setBounds(380,100,150,30);
+        knockKnock.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
         knockKnock.addActionListener(actionEvent -> getJokeType());
-        typePanel.add(general);
-        typePanel.add(programming);
-        typePanel.add(knockKnock);
 
-        jokePanel = new JPanel();
-        jokePanel.setLayout(new BorderLayout());
-        joke = new JLabel();
-        jokePanel.add(joke);
+        joke = new JTextArea();
+        joke.setBounds(10,190,320,100);
+        joke.setWrapStyleWord(true);
+        joke.setLineWrap(true);
+        joke.setOpaque(false);
+        joke.setEditable(false);
+        joke.setFocusable(false);
+        joke.setBackground(UIManager.getColor("Label.background"));
+        joke.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+        joke.setBorder(UIManager.getBorder("Label.border"));
 
-        add(promptPanel, BorderLayout.NORTH);
-        add(typePanel, BorderLayout.CENTER);
-        add(jokePanel, BorderLayout.SOUTH);
+        frame.add(prompt);
+        frame.add(general);
+        frame.add(programming);
+        frame.add(knockKnock);
+        frame.add(joke);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void getJokeType() {
@@ -59,6 +70,7 @@ public class JokeFrame extends JFrame {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JokeService service = retrofit.create(JokeService.class);
+        JokeController controller = new JokeController(service);
 
         String type = null;
         switch (type) {
@@ -72,12 +84,10 @@ public class JokeFrame extends JFrame {
                service.getJoke("knock-knock");
                break;
        }
-
-        JokeController controller = new JokeController(service, joke);
         controller.requestData(type);
     }
 
     public static void main(String[] args) {
-        new JokeFrame().setVisible(true);
+        new JokeFrame();
     }
 }
