@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="nagel.joke.JokeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-05T07:52:13" hostname="DESKTOP-E0BP45E" time="0.827">
+<testsuite name="nagel.joke.JokeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-20T00:55:40" hostname="DESKTOP-E0BP45E" time="0.785">
   <properties/>
-  <testcase name="getJoke" classname="nagel.joke.JokeTest" time="0.827"/>
+  <testcase name="getJoke" classname="nagel.joke.JokeTest" time="0.785"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -8,9 +8,9 @@ import javax.swing.*;
 public class JokeController {
 
     private JokeService service;
-    private JTextArea joke;
+    private JLabel joke;
 
-    public JokeController(JokeService service, JTextArea joke) {
+    public JokeController(JokeService service, JLabel joke) {
         this.service = service;
         this.joke = joke;
     }
