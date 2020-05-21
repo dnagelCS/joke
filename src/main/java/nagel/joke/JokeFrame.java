@@ -22,7 +22,7 @@ public class JokeFrame extends JFrame {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
     JokeService service = retrofit.create(JokeService.class);
-    JokeController controller = new JokeController(service, joke);
+    JokeController controller = new JokeController(service);
 
     public JokeFrame() {
         setSize(600, 400);
@@ -60,17 +60,17 @@ public class JokeFrame extends JFrame {
 
     private void getGeneralJoke() {
         service.getJoke("general");
-        controller.requestData("general");
+        controller.requestData("general", joke);
     }
 
     private void getProgrammingJoke() {
         service.getJoke("programming");
-        controller.requestData("programming");
+        controller.requestData("programming", joke);
     }
 
     private void getKnockKnockJoke() {
         service.getJoke("knock-knock");
-        controller.requestData("knock-knock");
+        controller.requestData("knock-knock", joke);
 
 }
 
