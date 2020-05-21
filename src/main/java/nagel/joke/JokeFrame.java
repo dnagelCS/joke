@@ -17,13 +17,6 @@ public class JokeFrame extends JFrame {
 
     private JLabel joke;
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://official-joke-api.appspot.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    JokeService service = retrofit.create(JokeService.class);
-    JokeController controller = new JokeController(service, joke);
-
     public JokeFrame() {
         setSize(600, 300);
         setTitle("Random Joke");
@@ -73,6 +66,12 @@ public class JokeFrame extends JFrame {
         controller.requestData("knock-knock");
 
 }
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://official-joke-api.appspot.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    JokeService service = retrofit.create(JokeService.class);
+    JokeController controller = new JokeController(service, joke);
 
     public static void main(String[] args) {
         new JokeFrame().setVisible(true);
