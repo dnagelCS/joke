@@ -18,6 +18,14 @@ public class JokeFrame extends JFrame {
     private JLabel joke;
 
     public JokeFrame() {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://official-joke-api.appspot.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        JokeService service = retrofit.create(JokeService.class);
+        JokeController controller = new JokeController(service, joke);
+
         setSize(600, 300);
         setTitle("Random Joke");
         setLayout(new BorderLayout());
@@ -32,13 +40,13 @@ public class JokeFrame extends JFrame {
         typePanel.setLayout(new GridLayout(1, 3));
         general = new JButton("General");
         general.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-        general.addActionListener(actionEvent -> getGeneralJoke());
+        general.addActionListener(actionEvent -> getGeneralJoke(service, controller));
         programming = new JButton("Programming");
         programming.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-        programming.addActionListener(actionEvent -> getProgrammingJoke());
+        programming.addActionListener(actionEvent -> getProgrammingJoke(service, controller));
         knockKnock = new JButton("Knock-Knock");
         knockKnock.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
-        knockKnock.addActionListener(actionEvent -> getKnockKnockJoke());
+        knockKnock.addActionListener(actionEvent -> getKnockKnockJoke(service, controller));
         typePanel.add(general);
         typePanel.add(programming);
         typePanel.add(knockKnock);
@@ -51,27 +59,22 @@ public class JokeFrame extends JFrame {
         add(joke, BorderLayout.SOUTH);
     }
 
-    private void getGeneralJoke() {
+    private void getGeneralJoke(JokeService service, JokeController controller) {
         service.getJoke("general");
         controller.requestData("general");
     }
 
-    private void getProgrammingJoke() {
+    private void getProgrammingJoke(JokeService service, JokeController controller) {
         service.getJoke("programming");
         controller.requestData("programming");
     }
 
-    private void getKnockKnockJoke() {
+    private void getKnockKnockJoke(JokeService service, JokeController controller) {
         service.getJoke("knock-knock");
         controller.requestData("knock-knock");
 
 }
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://official-joke-api.appspot.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    JokeService service = retrofit.create(JokeService.class);
-    JokeController controller = new JokeController(service, joke);
+
 
     public static void main(String[] args) {
         new JokeFrame().setVisible(true);
