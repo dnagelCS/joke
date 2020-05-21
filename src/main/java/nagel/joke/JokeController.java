@@ -8,19 +8,22 @@ import javax.swing.*;
 public class JokeController {
 
     private JokeService service;
+    private JLabel joke;
 
-    public JokeController(JokeService service) {
+    public JokeController(JokeService service, JLabel joke) {
         this.service = service;
+        this.joke = joke;
     }
 
-    public void requestData(String type, JLabel joke) {
+    public void requestData(String type) {
         service.getJoke(type).enqueue(new Callback<Joke>() {
             @Override
             public void onResponse(Call<Joke> call, Response<Joke> response) {
                 Joke jokeClass = response.body();
                 assert jokeClass != null;
-                joke.setText(jokeClass.id + " " + jokeClass.type + " "
-                + jokeClass.setup + " " + jokeClass.punchline);
+                joke.setText("Joke ID: " + jokeClass.id + " Joke Type: " + jokeClass.type +
+                        " Setup: " + jokeClass.setup + " Punchline: " + jokeClass.punchline);
+                assert joke != null;
             }
 
             @Override
