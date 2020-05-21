@@ -51,6 +51,7 @@ public class JokeFrame extends JFrame {
         typePanel.add(knockKnock);
 
         joke = new JLabel();
+        joke.setOpaque(true);
 
         add(prompt, BorderLayout.NORTH);
         add(typePanel, BorderLayout.CENTER);
@@ -74,6 +75,6 @@ public class JokeFrame extends JFrame {
 }
 
     public static void main(String[] args) {
-        new JokeFrame();
+        new JokeFrame().setVisible(true);
     }
 }
