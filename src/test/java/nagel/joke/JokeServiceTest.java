@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
 
-public class JokeTest {
+public class JokeServiceTest {
 
     @Test
     public void JokeServiceTest() throws IOException {
