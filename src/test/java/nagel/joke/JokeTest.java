@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 public class JokeTest {
 
     @Test
-    public void getJoke() throws IOException {
+    public void JokeServiceTest() throws IOException {
         //given
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://official-joke-api.appspot.com")
